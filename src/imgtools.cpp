@@ -6,12 +6,15 @@
 #define STB_IMAGE_WRITE_IMPLEMENTATION
 #include <stb_image_write.h>
 
+#define TINYEXR_IMPLEMENTATION
+#include <tinyexr.h>
+
 int main(int argc, char* argv[])
 {
 	if (argc < 2)
 	{
 		printf("Usage: filename\n");
-		return 0;
+		exit(-1);
 	}
 
 	printf("Load file %s\n", argv[1]);
