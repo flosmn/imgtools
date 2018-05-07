@@ -7,3 +7,5 @@ include_directories(${STB_PATH})
 
 add_executable(imgtools
 	src/imgtools.cpp)
+
+add_dependencies(imgtools stb)

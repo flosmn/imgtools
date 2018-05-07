@@ -3,6 +3,9 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include <stb_image.h>
 
+#define STB_IMAGE_WRITE_IMPLEMENTATION
+#include <stb_image_write.h>
+
 int main(int argc, char* argv[])
 {
 	if (argc < 2)
@@ -17,6 +20,10 @@ int main(int argc, char* argv[])
 	unsigned char* data = stbi_load(argv[1], &w, &h, &n, 0);
 
 	printf("w %d, h %d, n %d\n", w, h, n);
+
+	printf("write image as test.jpg\n");
+	stbi_write_jpg("test.jpg", w, h, n, data, 100);
+
 	stbi_image_free(data);
 
 	return 0;
