@@ -20,7 +20,7 @@ int main(int argc, char** argv)
 
 	if (argc > 3) 
 	{
-		if (argc != 5 && argc != 7)
+		if ((argc - 3) % 2 != 0)
 		{
 			printf("Usage: convert input output [--gamma] [--exposure]\n");
 			exit(-1);
@@ -37,17 +37,18 @@ int main(int argc, char** argv)
 		}
 	}
 
-	printf("convert %s to %s using gamma %f and exposure %f\n", argv[1], argv[2], gamma, exposure);
+	printf("convert %s to %s using gamma %f and exposure %f\n", 
+			argv[1], argv[2], gamma, exposure);
 
 	Image src;
 	src.load(argv[1]);
 	
 	Image dst(src.width, src.height, src.channels);
 	// ignore alpha channel
-	for (size_t y = 0; y < src.height; ++y)
-	for (size_t x = 0; x < src.width;  ++x)
+	for (std::size_t y = 0; y < src.height; ++y)
+	for (std::size_t x = 0; x < src.width;  ++x)
 	{
-		size_t offset = src.channels * (src.width * y + x);
+		std::size_t offset = src.channels * (src.width * y + x);
 		for (int c = 0; c < 3; ++c)
 			dst.data[offset + c] = std::pow(2, exposure) * src.data[offset + c];
 		if (src.channels == 4)

@@ -8,23 +8,23 @@ struct Image
 		width(0), height(0), channels(0) 
 	{}
 
-	Image(size_t w, size_t h, size_t c) : 
+	Image(std::size_t w, std::size_t h, std::size_t c) : 
 		width(w), height(h), channels(c) 
 	{
 		data.resize(width*height*channels);
 	}
 
-	size_t width;
-	size_t height;
-	size_t channels;
+	std::size_t width;
+	std::size_t height;
+	std::size_t channels;
 	std::vector<float> data;
 
-	size_t size() const
+	std::size_t size() const
 	{
 		return width*height*channels;
 	}
 
-	size_t byte_size() const
+	std::size_t byte_size() const
 	{
 		return size()*sizeof(float);
 	}
