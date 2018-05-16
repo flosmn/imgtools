@@ -17,5 +17,10 @@ add_executable(convert
 	src/convert.cpp
 	src/image.cpp)
 
+add_executable(mean_image_brightness
+	src/mean_image_brightness.cpp
+	src/image.cpp)
+
 add_dependencies(resize stb tinyexr)
 add_dependencies(convert stb tinyexr)
+add_dependencies(mean_image_brightness stb tinyexr)

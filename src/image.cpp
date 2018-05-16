@@ -113,16 +113,22 @@ load_pfm(const char* filename, Image* img)
 	readCommentsAndEmptyLines(file);
 	
 	// read width, height
-	int width, height, endian;     
+	int width, height;     
 	getline(file, line);
-	std::sscanf(line.c_str(), "%i %i %i", &width, &height, &endian);
+	std::sscanf(line.c_str(), "%i %i", &width, &height);
 	assert(width > 0 && height > 0);
+
+	// read endianess
+	int endian;     
+	getline(file, line);
+	std::sscanf(line.c_str(), "%i", &endian);
 	bool little_endian_read = endian < 0 ? true : false;
 	if(little_endian_read != little_endian()) 
 	{ 
 		fprintf(stderr, "file has different endianness.\n");
 		return 1;
 	}     
+
 	img->width = width;
 	img->height = height;
 	img->channels = 3; // only RGB is supported XXX: add R support
@@ -163,7 +169,7 @@ save_pfm(const char* filename, const Image* img)
 				img->channels);
 		return 1;
 	} 
-	of << img->width << " " << img->height
+	of << img->width << " " << img->height << "\n"
 	   << (little_endian() ? "-1" : "1") << "\n" 
 	   << std::flush;
 
