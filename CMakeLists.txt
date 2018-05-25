@@ -25,7 +25,12 @@ add_executable(white_balance
 	src/white_balance.cpp
 	src/image.cpp)
 
+add_executable(color_palette
+	src/color_palette.cpp
+	src/image.cpp)
+
 add_dependencies(resize stb tinyexr)
 add_dependencies(convert stb tinyexr)
 add_dependencies(mean_image_brightness stb tinyexr)
 add_dependencies(white_balance stb tinyexr)
+add_dependencies(color_palette stb tinyexr)

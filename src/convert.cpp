@@ -50,7 +50,12 @@ int main(int argc, char** argv)
 	{
 		std::size_t offset = src.channels * (src.width * y + x);
 		for (int c = 0; c < 3; ++c)
-			dst.data[offset + c] = std::pow(2, exposure) * src.data[offset + c];
+		{
+			float v = std::pow(2, exposure) * src.data[offset + c];
+			if (gamma > 0.f)
+				v = pow(v, 1.f/gamma);
+			dst.data[offset + c] = v;
+		}
 		if (src.channels == 4)
 			dst.data[offset + 3] = src.data[offset + 3];
 	}
