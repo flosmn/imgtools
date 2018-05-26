@@ -5,7 +5,7 @@
 
 #include <image.h>
 
-static float rye[5][3] {
+static float rye[5][3] = {
 	{ 0.0f, 0.0f, 0.5f },
 	{ 0.0f, 1.0f, 0.0f },
 	{ 1.0f, 1.0f, 0.0f },
